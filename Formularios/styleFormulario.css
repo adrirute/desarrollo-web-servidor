@@ -1,0 +1,57 @@
+/* Estilo para fieldsets */
+fieldset {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Estilo para etiquetas h2 dentro de fieldsets */
+fieldset h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Estilo para etiquetas label */
+label {
+  display: block;
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Estilo para inputs */
+input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Estilo para botones dentro de fieldsets */
+fieldset button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo para botones cuando se les pasa el mouse por encima */
+fieldset button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para botones cuando se les da clic */
+fieldset button:active {
+  background-color: #003d80;
+}
