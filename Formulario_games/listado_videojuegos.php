@@ -24,6 +24,7 @@
                     <th>Titulo</th>
                     <th>PEGI</th>
                     <th>Compañia</th>
+                    <th>Imagen</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,8 +35,14 @@
                         echo "<td>" . $fila ["id_videojuego"] . "</td>";
                         echo "<td>" . $fila ["titulo"] . "</td>";
                         echo "<td>" . $fila ["pegi"] . "</td>";
-                        echo "<td>" . $fila ["compania"] . "</td>";
-                    echo "</tr>";
+                        echo "<td>" . $fila ["compania"] . "</td>";?>
+                        <td>
+                            <img width="60" height="80" src="<?php echo $fila["imagen"] ?>">
+                        </td>
+                        <?php
+                        echo "</tr>";
+
+                    
                     /*  echo $fila["titulo"] . " " . $fila["pegi"] . "<br>"; */ 
                 }
             ?>

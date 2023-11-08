@@ -1,0 +1,23 @@
+table.mi_tabla {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  caption.mi_caption{
+padding: 8px;
+    border: 1px solid #dddddd;
+    background-color: violet;
+    font-weight: bold;
+  }

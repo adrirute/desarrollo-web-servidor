@@ -22,6 +22,12 @@
         
         $temp_compania = depurar($_POST["compania"]);
     
+        $nombre_fichero = $_FILES["imagen"]["name"];
+        $ruta_temporal = $_FILES["imagen"]["tmp_name"];
+        $formato = $_FILES["imagen"]["type"];
+        $ruta_final = "imagenes/" . $nombre_fichero;
+
+        move_uploaded_file($ruta_temporal, $ruta_final);
 
     /* Validacion de id */
     if(strlen($temp_id) == 0){
@@ -75,11 +81,9 @@
     }
     ?>
 
-
-
     <div class="container">
         <h1>Almacen de Videojuegos</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form_label" for="">ID: </label>
                 <input class="form-control" type="text" name="id"> 
@@ -106,10 +110,16 @@
                 <label class="form_label" for="">Compañia: </label>
                 <input class="form-control" type="text" name="compania">
                 <?php if(isset($err_compania)) echo $err_compania ?>
+            </div>        
+            <div class="mb-3">
+                <label for="" class="form-label">Imagen</label>
+                <input type="file" name="imagen">
             </div>
             <input type="submit" class="btn btn-primary" value="Enviar">
         </form>
     </div>
+
+    
 
     <?php
     if(isset($id) && isset($titulo) && isset($pegi) && isset($compania)) {
@@ -117,8 +127,8 @@
         echo "<h3>$titulo</h3>"; 
         echo "<h3>$pegi</h3>";
         echo "<h3>$compania</h3>";
-        $sql = "INSERT INTO videojuegos(id_videojuego, titulo, pegi, compania) /* mismos nombres que en el mysql */
-            VALUES ('$id', '$titulo', '$pegi', '$compania')";
+        $sql = "INSERT INTO videojuegos(id_videojuego, titulo, pegi, compania, imagen) /* mismos nombres que en el mysql */
+            VALUES ('$id', '$titulo', '$pegi', '$compania', '$ruta_final')";
         
         $conexion->query($sql);
      }
