@@ -100,14 +100,15 @@ if (empty($temp_fechaNacimiento)) {
     <?php
 
     if(isset($usuario) && isset($contrasena_cifrada) && isset($fechaNacimiento)){
-        echo "aaaa";
-    $sql = "INSERT INTO Usuarios (usuario, contrasena, fechaNacimiento)
-        values ('$usuario', '$contrasena_cifrada', '$fechaNacimiento')";
+        $sql = "INSERT INTO Usuarios (usuario, contrasena, fechaNacimiento)
+            values ('$usuario', '$contrasena_cifrada', '$fechaNacimiento')";
+
+        $conexion->query($sql);
+        
+        $sql = "INSERT INTO Cestas (usuario, precioTotal)  values ('$usuario', 0)"; 
     
-     $sql = "INSERT INTO Cestas (usuario, precioTotal)  values ('$usuario', 0)"; 
- 
-    $conexion->query($sql);
-    }
+        $conexion->query($sql);
+        }
     ?>
 
 
