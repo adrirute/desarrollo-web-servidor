@@ -14,6 +14,11 @@
 </head>
 <body>
     <?php
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $idProducto = $_POST["idProducto"];
+        echo "<p>El producto seleccionado es $idProducto</p>";
+    }
+
     session_start();
 
     if(isset($_SESSION["usuario"])){
@@ -23,6 +28,9 @@
         $_SESSION["usuario"] = "invitado";
         $usuario = $_SESSION["usuario"]; 
     }
+
+    $sql = "SELECT rol FROM Usuarios WHERE usuario = '$usuario'";
+    $rol = $conexion -> query($sql); //para conectarse a la data base
     ?>
     <div class="container">
         <h1>Listado de Productos</h1>
@@ -53,27 +61,39 @@
                     <th>Descripción</th>
                     <th>Cantidad</th>
                     <th>Imagen</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    foreach ($productos as $producto) {
-                        echo "<tr>";
-                        echo "<td>" . $producto->idProducto . "</td>";
-                        echo "<td>" . $producto->nombreProducto . "</td>";
-                        echo "<td>" . $producto->precio . "</td>";
-                        echo "<td>" . $producto->descripcion . "</td>";
-                        echo "<td>" . $producto->cantidad . "</td>";?>
+                    foreach ($productos as $producto) { ?>
+                       <tr>
+                            <td><?php echo $producto->idProducto ?></td>
+                            <td><?php echo $producto->nombreProducto?></td>
+                            <td><?php echo $producto->precio?></td>
+                            <td><?php echo $producto->descripcion?></td>
+                            <td><?php echo $producto->cantidad?></td>
+                       
                         <td>
                             <img width="160px" height="160px" src="<?php echo $producto->imagen ?>">
                         </td>
-                        <?php
-                        echo "</tr>";
-                    }               
-                ?>
-
+                        <td>
+                            <form action="" method="post">
+                                <input type="hidden" name="idProducto" value="><?php echo $producto -> $idProducto ?>">
+                                <input class="btn btn-danger" type="submit" value="Añadir a cesta">
+                            </form>
+                        </td>
+                        </tr>
+                        <?php                       
+                    }?>            
             </tbody>
         </table>
+
+        <?php
+            if($rol -> fetch_assoc()["rol"] == "Admin"){
+                echo "<a href='Producto.php'>Crear Producto</a>"
+            }
+        ?>
         
     </div>
 
