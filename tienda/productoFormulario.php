@@ -137,6 +137,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             </div>
         <input type="submit" value="Aceptar">
         </form>
+        <a href="cerrar_sesion.php"><button>Cerrar Sesion</button></a>
+        <a href="pag_principal.php"><button>Volver a pag principal</button></a>
     </div>
 
     <?php

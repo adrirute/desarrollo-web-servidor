@@ -5,5 +5,3 @@ function depurar(string $entrada): string{
     $salida = trim($salida);/* quitar espacios en el formulario */
     return $salida;
 }
-
-?>

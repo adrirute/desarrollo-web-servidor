@@ -22,6 +22,7 @@
             }else{
                 while($fila = $resultado -> fetch_assoc()){ /* coge una fila de una tabla de una consulta y lo convierte en array */
                     $contrasena_cifrada = $fila["contrasena"];
+                    $rol = $fila["rol"];
                 }
 
                 $acceso_valido = password_verify($contrasena, $contrasena_cifrada);
@@ -30,15 +31,14 @@
                     echo "INICIO DE SESION COMPLETADO";
                     session_start();
                     $_SESSION["usuario"]=$usuario;
-                    header('location: productoFormulario.php');
+                    $_SESSION["rol"]=$rol;
+                    header('location: pag_principal.php');
                 }else{
                     echo "CONTRASEÑA INCORRECTA";
                 }
             }
         }
     ?>
-
-
     <div class="container">
     <h1>Iniciar Sesion</h1>
     <form action="" method="post">
@@ -52,8 +52,10 @@
         </div>  
     <input type="submit" class="btn btn-primary" value="Iniciar Sesion">
     </form>
+    <br>
+    <a href="cerrar_sesion.php"><button class="btn btn-primary">Cerrar Sesion</button></a>
     </div>
-    <a href="cerrar_sesion.php"><input type="button" value="Cerrar Sesion"></a>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

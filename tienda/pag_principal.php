@@ -10,15 +10,11 @@
     </style>
     <?php require 'base_de_datos.php' ?>
     <?php require 'Producto.php' ?>
+    <?php require 'funciones/util.php' ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
     <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $idProducto = $_POST["idProducto"];
-        echo "<p>El producto seleccionado es $idProducto</p>";
-    }
-
     session_start();
 
     if(isset($_SESSION["usuario"])){
@@ -28,9 +24,22 @@
         $_SESSION["usuario"] = "invitado";
         $usuario = $_SESSION["usuario"]; 
     }
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $idProducto = $_POST["idProducto"];
+        echo "<p>El producto seleccionado es $idProducto</p>";
 
-    $sql = "SELECT rol FROM Usuarios WHERE usuario = '$usuario'";
-    $rol = $conexion -> query($sql); //para conectarse a la data base
+        $sql = "SELECT idCesta FROM Cestas WHERE usuario = '$usuario'";
+        $resultado = $conexion -> query($sql);
+        while($fila = $resultado -> fetch_assoc()){
+            $idCesta = $fila["idCesta"];
+        }
+        
+        $sql = "INSERT INTO ProductosCestas (idProducto, idCesta, cantidad) VALUES ('$idProducto', '$idCesta', 1)";
+        $conexion -> query($sql);
+    }
+    
+
     ?>
     <div class="container">
         <h1>Listado de Productos</h1>
@@ -79,7 +88,7 @@
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="idProducto" value="><?php echo $producto -> $idProducto ?>">
+                                <input type="hidden" name="idProducto" value="<?php echo $producto -> idProducto ?>">
                                 <input class="btn btn-danger" type="submit" value="Añadir a cesta">
                             </form>
                         </td>
@@ -90,13 +99,12 @@
         </table>
 
         <?php
-            if($rol -> fetch_assoc()["rol"] == "Admin"){
-                echo "<a href='Producto.php'>Crear Producto</a>"
+            if($_SESSION["rol"] == "admin"){
+                echo "<a href='productoFormulario.php'><button>Crear Producto</button></a>";
             }
-        ?>
-        
+        ?>       
+        <a href="cerrar_sesion.php"><button>Cerrar Sesion</button></a>
     </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>   
 </body>
 </html>
