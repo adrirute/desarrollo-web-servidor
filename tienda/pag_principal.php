@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-       
-
-    </style>
     <?php require 'base_de_datos.php' ?>
     <?php require 'Producto.php' ?>
     <?php require 'funciones/util.php' ?>
@@ -24,6 +20,8 @@
         $_SESSION["usuario"] = "invitado";
         $usuario = $_SESSION["usuario"]; 
     }
+
+    
     
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $idProducto = $_POST["idProducto"];
@@ -104,6 +102,7 @@
             }
         ?>       
         <a href="cerrar_sesion.php"><button>Cerrar Sesion</button></a>
+        <a href="tablaCesta.php"><button>Cesta</button></a>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>   
 </body>
