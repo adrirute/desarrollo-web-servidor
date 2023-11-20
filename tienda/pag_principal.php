@@ -32,9 +32,16 @@
         while($fila = $resultado -> fetch_assoc()){
             $idCesta = $fila["idCesta"];
         }
+        /*$idCesta = $resultado->fetch_assoc()["idCesta"]*/
         
-        $sql = "INSERT INTO ProductosCestas (idProducto, idCesta, cantidad) VALUES ('$idProducto', '$idCesta', 1)";
-        $conexion -> query($sql);
+        /*Controlamos si la cantidad es correcta*/
+        $cantidades = $_POST["cantidades"];//select
+        if($cantidades <= $_POST["cantidadReal"]){
+            $sql = "INSERT INTO ProductosCestas (idProducto, idCesta, cantidad) VALUES ('$idProducto', '$idCesta', '".$cantidades."')";
+            $conexion -> query($sql);
+        }else{
+            echo "No hay producto suficiente";
+        }
     }
     
 
@@ -80,12 +87,23 @@
                             <td><?php echo $producto->precio?></td>
                             <td><?php echo $producto->descripcion?></td>
                             <td><?php echo $producto->cantidad?></td>
-                       
+                        <td>
+                        
+                        </td>
                         <td>
                             <img width="160px" height="160px" src="<?php echo $producto->imagen ?>">
                         </td>
                         <td>
                             <form action="" method="post">
+                            
+                            <select name="cantidades">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <input type="hidden" name="cantidadReal" value="<?php echo $producto -> cantidad ?>"> <!-- Controlamos la cantidad que hay -->
                                 <input type="hidden" name="idProducto" value="<?php echo $producto -> idProducto ?>">
                                 <input class="btn btn-danger" type="submit" value="Añadir a cesta">
                             </form>

@@ -94,7 +94,9 @@ if (empty($temp_fechaNacimiento)) {
                 <?php if(isset($err_fechaNacimiento)) echo $err_fechaNacimiento ?>
             </div>
             <input type="submit" value="Aceptar">
-        </form>       
+        </form>
+        <br>
+        <a href="inicio_sesion.php"><button>Ir a Inicio Sesión</button></a>       
     </div>
 
     <?php
