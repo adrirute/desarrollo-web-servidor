@@ -66,7 +66,7 @@
         }
         ?>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover text-center">
             <thead class="table table-dark table-striped table-primary">
                 <tr>
                     <th>ID</th>
@@ -87,9 +87,9 @@
                             <td><?php echo $producto->precio?></td>
                             <td><?php echo $producto->descripcion?></td>
                             <td><?php echo $producto->cantidad?></td>
-                        <td>
                         
-                        </td>
+                        
+                        
                         <td>
                             <img width="160px" height="160px" src="<?php echo $producto->imagen ?>">
                         </td>
