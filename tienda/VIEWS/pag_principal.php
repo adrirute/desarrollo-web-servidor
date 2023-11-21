@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php require 'base_de_datos.php' ?>
-    <?php require 'Producto.php' ?>
-    <?php require 'funciones/util.php' ?>
+    <?php require '../UTIL/base_de_datos.php' ?>
+    <?php require '../UTIL/Producto.php' ?>
+    <?php require '../UTIL/util.php' ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
@@ -16,9 +16,9 @@
     if(isset($_SESSION["usuario"])){
         $usuario = $_SESSION["usuario"];
     }else{
-        /* header('location: iniciar_sesion.php'); */ /* Si queremos q nos redirija al login */
-        $_SESSION["usuario"] = "invitado";
-        $usuario = $_SESSION["usuario"]; 
+        header('location: inicio_sesion.php');   
+        /* $_SESSION["usuario"] = "invitado";
+        $usuario = $_SESSION["usuario"];  */ /* Con esto solo se podrá acceder si se inicia sesión */
     }
 
     
@@ -103,7 +103,7 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <input type="hidden" name="cantidadReal" value="<?php echo $producto -> cantidad ?>"> <!-- Controlamos la cantidad que hay -->
+                                <input type="hidden" name="cantidadReal" value="<?php echo $producto -> cantidad ?>"> <!-- Controlamos la cantidad que hay -->
                                 <input type="hidden" name="idProducto" value="<?php echo $producto -> idProducto ?>">
                                 <input class="btn btn-danger" type="submit" value="Añadir a cesta">
                             </form>
@@ -119,7 +119,7 @@
                 echo "<a href='productoFormulario.php'><button>Crear Producto</button></a>";
             }
         ?>       
-        <a href="cerrar_sesion.php"><button>Cerrar Sesion</button></a>
+        <a href="../UTIL/cerrar_sesion.php"><button>Cerrar Sesion</button></a>
         <a href="tablaCesta.php"><button>Cesta</button></a>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>   

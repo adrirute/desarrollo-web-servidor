@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Producto</title>
-    <?php require 'funciones/util.php' ?>
-    <?php require 'base_de_datos.php' ?>
+    <?php require '../UTIL/util.php' ?>
+    <?php require '../UTIL/base_de_datos.php' ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $nombre_fichero = $_FILES["imagen"]["name"];
     $ruta_temporal = $_FILES["imagen"]["tmp_name"];
     $formato = $_FILES["imagen"]["type"];
-    $ruta_final = "imagenes/" . $nombre_fichero; //debo crear carpeta imagenes
+    $ruta_final = "IMAGES/" . $nombre_fichero; //debo crear carpeta imagenes
     $tamano = $_FILES["imagen"]["size"];
     //move_uploaded_file($ruta_temporal, $ruta_final); 
 
@@ -137,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             </div>
         <input type="submit" value="Aceptar">
         </form>
-        <a href="cerrar_sesion.php"><button>Cerrar Sesion</button></a>
+        <a href="../UTIL/cerrar_sesion.php"><button>Cerrar Sesion</button></a>
         <a href="pag_principal.php"><button>Volver a pag principal</button></a>
     </div>
 
