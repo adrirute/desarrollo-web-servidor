@@ -85,10 +85,37 @@
 
     <?php
     if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $sql = "INSERT INTO Pedidos (usuario, precioTotal) VALUES  ('$usuario', '$total') ";
-        $sql
+        /* Inserta en tabla Pedidos cuando se pula Finalizar Compra */
+        $sql = "INSERT INTO Pedidos (usuario, precioTotal) VALUES  ('$usuario', '$total') ";  
         $conexion->query($sql);
+        
+        // Obtener el id del pedido autogenerado
+        $idPedido = $conexion->insert_id;
 
+        /* Se inserta en LineaPedido */
+        $sql = "SELECT * FROM ProductosCestas WHERE idCesta = '$idCesta'";
+        $resultado = $conexion->query($sql);
+        $contador = 1;
+        while ($fila = $resultado->fetch_assoc()) {
+            $idProducto = $fila["idProducto"];
+            $cantidad = $fila["cantidad"];
+
+            // Obtener el precio unitario del producto de la tabla Productos
+            $sqlProducto = "SELECT precio FROM Productos WHERE idProducto = '$idProducto'";
+            $resultadoProducto = $conexion->query($sqlProducto);
+            $precioUnitario = $resultadoProducto->fetch_assoc()["precio"];
+            
+            
+            $sqlLineaPedido = "INSERT INTO LineaPedido VALUES ('$contador', '$idProducto', '$idPedido', '$precioUnitario', '$cantidad')";
+            $conexion->query($sqlLineaPedido);
+
+            $contador++;
+    }
+            
+        /* Se borra cesta una vez se pulse Finalizar Compra(antes se borra en LineaPedidp para evitar error ForeignKey) */        
+        $sqlProductCesta = "DELETE FROM ProductosCestas WHERE idCesta = '$idCesta'";
+        $conexion->query($sqlProductCesta);
+                  
     }  
     ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>   
