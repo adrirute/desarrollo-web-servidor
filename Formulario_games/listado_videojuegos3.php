@@ -10,9 +10,6 @@
     <link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
 <body>
-
-    
-
     <div class="container">
         <h1>Listado de videojuegos</h1>
         <?php
@@ -28,35 +25,25 @@
                     <th>PEGI</th>
                     <th>Compañia</th>
                     <th>Imagen</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                while($fila = $resultado -> fetch_assoc()){ /* coge la fila de la tabla en la bbdd y crea un array asociativo */
-                    /* [id=2. tituo=Spiderman, pefi=7, compañia= Sony] */
-                    echo "<tr>";
-                        echo "<td>" . $fila ["id_videojuego"] . "</td>";
-                        echo "<td>" . $fila ["titulo"] . "</td>";
-                        echo "<td>" . $fila ["pegi"] . "</td>";
-                        echo "<td>" . $fila ["compania"] . "</td>";?>
-                        <td>
-                            <img width="60" height="80" src="<?php echo $fila["imagen"] ?>">
-                        </td>
-                        <td>
+                foreach($videojuegos as $videojuego){ ?>
+                    <tr>
+                        <td><?php echo $videojuego -> $id_videojuego ?></td>
+                        <td><?php echo $videojuego -> $titulo ?></td>
+                        <td><?php echo $videojuego -> $pegi ?></td>
+                        <td><?php echo $videojuego -> $compania ?></td>
+                    </tr>
+                    <td>
                         <form action="" method="post">
-                        <input type="hidden" name="id_videojuego" value="><?php echo $fila["id_videojuego"] ?>">
+                            <input type="hidden" name="id_videojuego" value="><?php echo $videojuego -> $id_videojuego ?>">
                             <input class="btn btn-danger" type="submit" value="Añadir a cesta">
-                        </td>
-                        <?php
-                        echo "</tr>";
-
-                    
-                    /*  echo $fila["titulo"] . " " . $fila["pegi"] . "<br>"; */ 
-                }
-            ?>
-
-
+                        </form>
+                    </td>
+                    <?php
+                }?>
             </tbody>
         </table>
         
