@@ -12,27 +12,32 @@
     <?php  
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $titulo = $_POST["busqTitulo"];
+    $titulo = $_POST["titulo"];
     
-    $sql = $conexion -> prepare ("SELECT * FROM libros WHERE titulo='?'");
-    $sql -> bind_param("s", $titulo )
+    $sql = $conexion -> prepare ("SELECT * FROM libros WHERE titulo LIKE CONCAT('%', ?, '%')");
+    $sql -> bind_param("s", $titulo);
     $sql -> execute();
     $result = $sql -> get_result();
     }    
             
     ?>
     <div class="container">
+        <h1>Libros Buscados</h1>
         <table class="table table-striped table-hover">
             <thead class="table table-dark table-striped table-primary">
                 <tr>
                     <th>Titulo</th>
+                    <th>Paginas</th>
+                    <th>Autor</th>
                 </tr>
                 </thead>
                 <tbody>
                     <?php
                     while($fila = $result -> fetch_assoc()){
                         echo "<tr>";
-                            echo "<td>" . $fila ["titulo"] . "</td>";                           
+                            echo "<td>" . $fila ["titulo"] . "</td>"; 
+                            echo "<td>" . $fila ["paginas"] . "</td>";
+                            echo "<td>" . $fila ["autor"] . "</td>";                          
                         echo "</tr>";
                     }
                     ?>
